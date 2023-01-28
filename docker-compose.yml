@@ -1,0 +1,22 @@
+version: '2'
+services:
+  webapp:
+    build: employeeManager
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/general_info_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+  database:
+    build: database
+    container_name: database
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=general_info_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1111
